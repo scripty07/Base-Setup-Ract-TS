@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FunctionComponent } from 'react';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import { Provider } from 'react-redux';
 
-function App() {
+import Sample from '@Components/Sample';
+
+import i18n from './i18n';
+import { store } from './store/store';
+
+const App: FunctionComponent = (): JSX.Element => {
+  const { t } = useTranslation();
+
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <I18nextProvider i18n={i18n}>
+      <Provider store={store}>
+        <>
+          <h1 style={{ textAlign: 'center' }}>{t('Your App')}</h1>
+          <Sample />
+        </>
+      </Provider>
+    </I18nextProvider>
   );
-}
+};
 
 export default App;
